@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'zeitwerk'
 
 APP_LOADER = Zeitwerk::Loader.for_gem
