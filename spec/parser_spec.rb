@@ -20,10 +20,11 @@ describe 'parse' do
 end
 
 describe 'report' do
-  let(:sample_results) { "test results" }
+  let(:subject) { report(sample_results, reporter: test_reporter) }
+  let(:sample_results) { 'test results' }
   let(:test_reporter) { ->(results) { results } }
 
   it 'calls reporter' do
-    expect(report(sample_results, reporter: test_reporter)).to eq(sample_results)
+    expect(subject).to eq(sample_results)
   end
 end
