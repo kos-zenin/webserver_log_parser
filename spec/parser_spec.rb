@@ -11,7 +11,7 @@ describe 'parse' do
 
   context 'when file passed' do
     let(:file) { instance_double('file') }
-    let(:test_parser) { ->(file) { file } }
+    let(:test_parser) { ->(file:) { file } }
 
     it 'parses file, builds history of visits in descending order' do
       expect(parse(file: file, parser: test_parser)).to eq(file)
@@ -19,12 +19,23 @@ describe 'parse' do
   end
 end
 
+describe 'collect' do
+  let(:subject) { collect(visits: sample_visits, collector: test_collector) }
+  let(:sample_visits) { 'test visits' }
+  let(:test_collector) { ->(visits:) { visits } }
+
+  it 'calls collector' do
+    expect(subject).to eq(sample_visits)
+  end
+end
+
 describe 'report' do
-  let(:subject) { report(sample_results, reporter: test_reporter) }
+  let(:subject) { report(results: sample_results, reporter: test_reporter) }
   let(:sample_results) { 'test results' }
-  let(:test_reporter) { ->(results) { results } }
+  let(:test_reporter) { ->(results:) { results } }
 
   it 'calls reporter' do
     expect(subject).to eq(sample_results)
   end
 end
+
