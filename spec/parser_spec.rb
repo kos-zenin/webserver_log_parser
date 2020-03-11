@@ -38,4 +38,3 @@ describe 'report' do
     expect(subject).to eq(sample_results)
   end
 end
-
