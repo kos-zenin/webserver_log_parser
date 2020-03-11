@@ -4,7 +4,7 @@ module Files
   module Parsers
     module Logs
       class File
-        def initialize(file_reader: ::Files::Readers::Log)
+        def initialize(file_reader: ::Files::Readers::Log.new)
           @file_reader = file_reader
         end
 
