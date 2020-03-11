@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 describe ::Collectors::UniqueVisits::Main do
-  subject { described_class.new(visits: visits) }
+  subject { described_class.new }
 
   let(:visit_struct) { Struct.new(:route) }
   let(:visits) do
@@ -32,7 +32,7 @@ describe ::Collectors::UniqueVisits::Main do
     end
 
     it 'builds combined visits and sorts them' do
-      expect(subject.call).to eq(expected_visits)
+      expect(subject.call(visits: visits)).to eq(expected_visits)
     end
   end
 end
