@@ -8,7 +8,13 @@ module Files
           @file_reader = file_reader
         end
 
-        def call(file:); end
+        def call(file:)
+          @file_reader.call(file: file) do |line|
+            route, ip = ::Files::Parsers::Logs::Line.new(line: line).call
+
+            yield ::Files::Data::Logs::Row.new(route: route, ip: ip) if route && ip
+          end
+        end
       end
     end
   end
