@@ -6,6 +6,10 @@ module Reporters
       @decorator = decorator
     end
 
-    def call(results: []); end
+    def call(results: [])
+      results.each do |result|
+        puts @decorator.call(visit: result)
+      end
+    end
   end
 end
