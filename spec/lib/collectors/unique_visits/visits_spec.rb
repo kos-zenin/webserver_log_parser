@@ -26,9 +26,9 @@ describe ::Collectors::UniqueVisits::Visits do
       expect(::Collectors::UniqueVisits::Visit).to receive(:new).with(route: 'b').and_return(b_visit)
       expect(::Collectors::UniqueVisits::Visit).to receive(:new).with(route: 'c').and_return(c_visit)
 
-      expect(a_visit).to receive(:increment_visit).exactly(4).times
-      expect(b_visit).to receive(:increment_visit).exactly(3).times
-      expect(c_visit).to receive(:increment_visit).exactly(2).times
+      expect(a_visit).to receive(:increment_visit!).exactly(4).times
+      expect(b_visit).to receive(:increment_visit!).exactly(3).times
+      expect(c_visit).to receive(:increment_visit!).exactly(2).times
     end
 
     it 'builds combined visits and sorts them' do

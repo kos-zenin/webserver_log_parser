@@ -11,7 +11,7 @@ module Collectors
       def add(visit:)
         @visits[visit.route] ||= ::Collectors::UniqueVisits::Visit.new(route: visit.route)
 
-        @visits[visit.route].increment_visit
+        @visits[visit.route].increment_visit!
       end
 
       def visits
