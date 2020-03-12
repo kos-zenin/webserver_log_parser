@@ -17,13 +17,18 @@ def collect(visit:, collector: UNIQUE_VISITS_COLLECTOR)
   collector.add(visit: visit)
 end
 
-STDOUT_REPORTER = ::Reporters::Stdout.new
-def report(results: [], reporter: STDOUT_REPORTER)
+VISITS_STDOUT_REPORTER = ::Reporters::Stdout.new
+STDOUT_REPORTER = ::Reporters::Stdout.new(decorator: ->(string) { string })
+def report(results: [], reporter: VISITS_STDOUT_REPORTER)
   reporter.call(results: results)
 end
 
 if $PROGRAM_NAME == __FILE__
-  parse(file: ARGV[0]) { |visit| collect(visit: visit) }
+  begin
+    parse(file: ARGV[0]) { |visit| collect(visit: visit) }
 
-  report(results: UNIQUE_VISITS_COLLECTOR.visits)
+    report(results: UNIQUE_VISITS_COLLECTOR.visits)
+  rescue ArgumentError => exception
+    STDOUT_REPORTER.call(results: [exception])
+  end
 end
