@@ -5,10 +5,10 @@ describe ::Collectors::UniqueVisits::Visit do
 
   let(:route) { '/test' }
 
-  describe 'increment_visit' do
+  describe 'increment_visit!' do
     it 'adds new visit' do
       expect(subject.count).to eq(0)
-      10.times { subject.increment_visit }
+      10.times { subject.increment_visit! }
       expect(subject.count).to eq(10)
     end
   end

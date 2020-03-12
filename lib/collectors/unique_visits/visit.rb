@@ -10,7 +10,7 @@ module Collectors
 
       attr_reader :route, :count
 
-      def increment_visit
+      def increment_visit!
         @count += 1
       end
     end
