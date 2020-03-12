@@ -4,9 +4,6 @@ module Files
   module Parsers
     module Logs
       class Line
-        ROUTE_REGEX = %r{^/\w+(/\w+)*$}.freeze
-        IP_REGEX = /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/.freeze
-
         def initialize(line:)
           @line = line
         end
@@ -14,17 +11,9 @@ module Files
         def call
           route, ip = @line.split(' ')
 
-          [route, ip] if valid_route?(route) && valid_ip?(ip)
-        end
+          row = ::Files::Data::Logs::Row.new(route, ip)
 
-        private
-
-        def valid_route?(route)
-          route =~ ROUTE_REGEX
-        end
-
-        def valid_ip?(ip)
-          ip =~ IP_REGEX
+          row if row.valid?
         end
       end
     end
