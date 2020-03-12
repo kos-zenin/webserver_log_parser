@@ -43,8 +43,8 @@ context 'unit tests' do
   end
 end
 
-context "integration tests" do
-  describe "parser.rb" do
+context 'integration tests' do
+  describe 'parser.rb' do
     subject { Open3.capture2("#{script_path} #{logfile_path}").first }
 
     let(:script_path) { File.expand_path('../bin/parser.rb', dir_name) }
@@ -69,7 +69,7 @@ context "integration tests" do
       let(:logfile_path) { File.expand_path('logfiles/empty_webserver.log', dir_name) }
 
       it 'prints nothing' do
-        expect(subject).to eq("")
+        expect(subject).to eq('')
       end
     end
 
@@ -88,6 +88,5 @@ context "integration tests" do
         expect(subject).to eq("Check file extension\n")
       end
     end
-
   end
 end

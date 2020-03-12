@@ -28,7 +28,7 @@ if $PROGRAM_NAME == __FILE__
     parse(file: ARGV[0]) { |visit| collect(visit: visit) }
 
     report(results: UNIQUE_VISITS_COLLECTOR.visits)
-  rescue ArgumentError => exception
-    STDOUT_REPORTER.call(results: [exception])
+  rescue ArgumentError => e
+    STDOUT_REPORTER.call(results: [e])
   end
 end
