@@ -10,6 +10,8 @@ module Files
         end
 
         attr_reader :route, :ip
+
+        def valid?; end
       end
     end
   end
