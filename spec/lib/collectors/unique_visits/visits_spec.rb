@@ -8,7 +8,7 @@ describe ::Collectors::UniqueVisits::Visits do
     [
       visit_struct.new('c'), visit_struct.new('c'),
       visit_struct.new('a'), visit_struct.new('a'), visit_struct.new('a'), visit_struct.new('a'),
-      visit_struct.new('b'), visit_struct.new('b'), visit_struct.new('b'),
+      visit_struct.new('b'), visit_struct.new('b'), visit_struct.new('b')
     ]
   end
 

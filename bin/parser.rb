@@ -3,25 +3,27 @@
 
 require_relative './../config/boot'
 
-DEFAULT_PARSER = ::Files::Parsers::Logs::File.new
-def parse(file:, parser: DEFAULT_PARSER)
+LOGS_PARSER = ::Files::Parsers::Logs::File.new
+def parse(file:, parser: LOGS_PARSER, &block)
   raise ArgumentError, "Usage: #{$PROGRAM_NAME} FILENAME" if file.nil?
 
-  parser.call(file: file)
+  parser.call(file: file) do |line|
+    block.call(line)
+  end
 end
 
-DEFAULT_COLLECTOR = ::Collectors::UniqueVisits::Main.new
-def collect(visits: [], collector: DEFAULT_COLLECTOR)
-  collector.call(visits: visits)
+UNIQUE_VISITS_COLLECTOR = ::Collectors::UniqueVisits::Visits.new
+def collect(visit:, collector: UNIQUE_VISITS_COLLECTOR)
+  collector.call(visit: visit)
 end
 
-DEFAULT_REPORTER = ->(results:) {}
+DEFAULT_REPORTER = ->(results:) { results }
 def report(results: [], reporter: DEFAULT_REPORTER)
   reporter.call(results: results)
 end
 
 if $PROGRAM_NAME == __FILE__
-  parse(file: ARGV[0])
-    .then { |visits| collect(visits: visits) }
-    .then { |results| report(results: results) }
+  parse(file: ARGV[0]) { |visit| collect(visit: visit) }
+
+  report(results: UNIQUE_VISITS_COLLECTOR.visits)
 end

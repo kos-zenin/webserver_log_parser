@@ -13,7 +13,7 @@ module Files
         validate(file)
 
         open_file(file).lazy.each do |line|
-          yield line if block_given?
+          yield line
         end
       end
 
