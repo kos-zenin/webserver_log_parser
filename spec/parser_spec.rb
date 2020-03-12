@@ -20,12 +20,12 @@ describe 'parse' do
 end
 
 describe 'collect' do
-  let(:subject) { collect(visits: sample_visits, collector: test_collector) }
-  let(:sample_visits) { 'test visits' }
-  let(:test_collector) { ->(visits:) { visits } }
+  let(:subject) { collect(visit: sample_visit, collector: test_collector) }
+  let(:sample_visit) { 'test visits' }
+  let(:test_collector) { ->(visit:) { visit } }
 
   it 'calls collector' do
-    expect(subject).to eq(sample_visits)
+    expect(subject).to eq(sample_visit)
   end
 end
 
