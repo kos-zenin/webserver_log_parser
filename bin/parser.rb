@@ -14,11 +14,11 @@ end
 
 UNIQUE_VISITS_COLLECTOR = ::Collectors::UniqueVisits::Visits.new
 def collect(visit:, collector: UNIQUE_VISITS_COLLECTOR)
-  collector.call(visit: visit)
+  collector.add(visit: visit)
 end
 
-DEFAULT_REPORTER = ->(results:) { results }
-def report(results: [], reporter: DEFAULT_REPORTER)
+STDOUT_REPORTER = ::Reporters::Stdout.new
+def report(results: [], reporter: STDOUT_REPORTER)
   reporter.call(results: results)
 end
 
