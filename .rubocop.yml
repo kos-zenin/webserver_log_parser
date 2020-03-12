@@ -7,3 +7,6 @@ Metrics/BlockLength:
   ExcludedMethods:
     - describe
     - context
+
+Style/StructInheritance:
+  Enabled: false
