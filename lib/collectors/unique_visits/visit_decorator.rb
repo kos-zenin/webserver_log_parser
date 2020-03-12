@@ -10,13 +10,13 @@ module Collectors
       }.freeze
       DEFAULT_FORMAT = '%<route>s %<count>s unique %<view_text>s'
 
-      def initialize(format: DEFAULT_FORMAT)
-        @format = format
+      def initialize(line_format: DEFAULT_FORMAT)
+        @line_format = line_format
       end
 
       def call(visit)
         format(
-          @format,
+          @line_format,
           route: visit.route,
           count: visit.count,
           view_text: VIEW_KEYWORD_PLURAL_MAPPING.fetch(visit.count, VIEW_KEYWORD_PLURAL)
