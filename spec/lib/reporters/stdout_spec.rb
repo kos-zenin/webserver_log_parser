@@ -9,8 +9,8 @@ describe ::Reporters::Stdout do
 
   describe 'call' do
     before do
-      expect(decorator).to receive(:call).with(visit: 'first line').and_return('formatted first line')
-      expect(decorator).to receive(:call).with(visit: 'second_line').and_return('formatted second_line')
+      expect(decorator).to receive(:call).with('first line').and_return('formatted first line')
+      expect(decorator).to receive(:call).with('second_line').and_return('formatted second_line')
     end
 
     it 'iterates over results and prints every result to stdout' do

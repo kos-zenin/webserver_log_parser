@@ -14,7 +14,7 @@ module Collectors
         @format = format
       end
 
-      def call(visit:)
+      def call(visit)
         format(
           @format,
           route: visit.route,

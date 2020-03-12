@@ -8,14 +8,14 @@ describe ::Collectors::UniqueVisits::VisitDecorator do
 
   describe 'call' do
     it 'formats visit' do
-      expect(subject.call(visit: visit)).to eq('/test 100 unique views')
+      expect(subject.call(visit)).to eq('/test 100 unique views')
     end
 
     context "when 1 view" do
       let(:count) { 1 }
 
       it 'formats visit' do
-        expect(subject.call(visit: visit)).to eq('/test 1 unique view')
+        expect(subject.call(visit)).to eq('/test 1 unique view')
       end
     end
   end

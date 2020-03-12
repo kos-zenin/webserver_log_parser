@@ -8,7 +8,7 @@ module Reporters
 
     def call(results: [])
       results.each do |result|
-        puts @decorator.call(visit: result)
+        puts @decorator.call(result)
       end
     end
   end
