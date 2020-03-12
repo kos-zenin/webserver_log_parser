@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-describe ::Collectors::UniqueVisits::Main do
+describe ::Collectors::UniqueVisits::Visits do
   subject { described_class.new }
 
   let(:visit_struct) { Struct.new(:route) }
   let(:visits) do
     [
+      visit_struct.new('c'), visit_struct.new('c'),
       visit_struct.new('a'), visit_struct.new('a'), visit_struct.new('a'), visit_struct.new('a'),
       visit_struct.new('b'), visit_struct.new('b'), visit_struct.new('b'),
-      visit_struct.new('c'), visit_struct.new('c')
     ]
   end
 
@@ -20,7 +20,7 @@ describe ::Collectors::UniqueVisits::Main do
   let(:b_visit) { instance_double(::Collectors::UniqueVisits::Visit, count: 3) }
   let(:c_visit) { instance_double(::Collectors::UniqueVisits::Visit, count: 2) }
 
-  describe 'call' do
+  describe 'add' do
     before do
       expect(::Collectors::UniqueVisits::Visit).to receive(:new).with(route: 'a').and_return(a_visit)
       expect(::Collectors::UniqueVisits::Visit).to receive(:new).with(route: 'b').and_return(b_visit)
@@ -32,7 +32,8 @@ describe ::Collectors::UniqueVisits::Main do
     end
 
     it 'builds combined visits and sorts them' do
-      expect(subject.call(visits: visits)).to eq(expected_visits)
+      visits.each { |visit| subject.add(visit: visit) }
+      expect(subject.visits).to eq(expected_visits)
     end
   end
 end
