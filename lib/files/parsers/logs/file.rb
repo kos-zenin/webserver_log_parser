@@ -10,9 +10,9 @@ module Files
 
         def call(file:)
           @file_reader.call(file: file) do |line|
-            route, ip = ::Files::Parsers::Logs::Line.new(line: line).call
+            row = ::Files::Parsers::Logs::Line.new(line: line).call
 
-            yield ::Files::Data::Logs::Row.new(route: route, ip: ip) if route && ip
+            yield row if row
           end
         end
       end
