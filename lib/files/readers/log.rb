@@ -10,7 +10,7 @@ module Files
       end
 
       def call(file:)
-        validate(file)
+        validate!(file)
 
         open_file(file).lazy.each do |line|
           yield line
@@ -22,12 +22,11 @@ module Files
       def open_file(file)
         @file_proxy.open(file, 'rb')
       rescue Errno::EACCES, Errno::ENOENT
-        false
+        raise ArgumentError, 'Check file permissions'
       end
 
-      def validate(file)
+      def validate!(file)
         raise ArgumentError, 'Check file extension' unless WHITELIST_EXTENSIONS.include?(@file_proxy.extname(file))
-        raise ArgumentError, 'Check file permissions' unless open_file(file)
       end
     end
   end
